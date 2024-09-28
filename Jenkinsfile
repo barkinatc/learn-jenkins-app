@@ -3,34 +3,32 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent{
-                docker{
+            agent {
+                docker {
                     image 'node:18-alpine'
-                    reuseNode true 
+                    reuseNode true
                 }
             }
             steps {
-                sh'''
+                sh '''
                 ls -la
                 '''
             }
         }
-    }
-   
+        
         stage('Test') {
-            agent{
-                docker{
+            agent {
+                docker {
                     image 'node:18-alpine'
-                    reuseNode true 
+                    reuseNode true
                 }
             }
             steps {
-                sh'''
-             
+                sh '''
                 touch index.html
                 npm test
                 '''
             }
-        
+        }
     }
 }
