@@ -16,7 +16,7 @@ pipeline {
             }
         }
     }
-    stages {
+   
         stage('Test') {
             agent{
                 docker{
@@ -31,6 +31,6 @@ pipeline {
                 npm test
                 '''
             }
-        }
+        
     }
 }
