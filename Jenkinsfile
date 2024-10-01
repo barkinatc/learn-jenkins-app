@@ -45,7 +45,7 @@ pipeline {
             }
             steps {
                 sh '''
-                ECHO E2E STAGE
+                echo ECHO E2E
                 npm install -g serve
                 serve -s build
                 npx playwright test
