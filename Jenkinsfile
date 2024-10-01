@@ -30,6 +30,7 @@ pipeline {
             }
             steps {
                 sh '''
+                echo TEST STAGE
                 touch build/index.html
                 npm test
                 '''
@@ -44,6 +45,7 @@ pipeline {
             }
             steps {
                 sh '''
+                ECHO E2E STAGE
                 npm install -g serve
                 serve -s build
                 npx playwright test
