@@ -34,7 +34,7 @@ pipeline {
 
             steps {
                 sh '''
-                    touch build/index.html
+                    echo zart
                     npm test
                 '''
             }
