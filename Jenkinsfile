@@ -1,29 +1,14 @@
 pipeline {
     agent any
-
     stages {
-        /*
-
-        stage('Build') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
+        stage('Initialize') {
+            steps {
+                script {
+                    docker.image('node:18-alpine').pull()
+                    docker.image('mcr.microsoft.com/playwright:v1.39.0-jammy').pull()
                 }
             }
-            steps {
-                sh '''
-                    ls -la
-                    node --version
-                    npm --version
-                    npm ci
-                    npm run build
-                    ls -la
-                '''
-            }
         }
-        */
-
         stage('Tests') {
             parallel {
                 stage('Unit tests') {
@@ -33,10 +18,8 @@ pipeline {
                             reuseNode true
                         }
                     }
-
                     steps {
                         sh '''
-                            #test -f build/index.html
                             npm test
                         '''
                     }
@@ -46,7 +29,6 @@ pipeline {
                         }
                     }
                 }
-
                 stage('E2E') {
                     agent {
                         docker {
@@ -54,7 +36,6 @@ pipeline {
                             reuseNode true
                         }
                     }
-
                     steps {
                         sh '''
                             npm install serve
@@ -63,7 +44,6 @@ pipeline {
                             npx playwright test  --reporter=html
                         '''
                     }
-
                     post {
                         always {
                             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright HTML Report', reportTitles: '', useWrapperFileDirectly: true])
