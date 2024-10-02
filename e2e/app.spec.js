@@ -2,9 +2,8 @@
 const { test, expect } = require('@playwright/test');
 
 test('has title', async ({ page }) => {
-  await page.goto('/');
-
-  // Expect a title "to contain" a substring.
+  await page.goto('http://localhost:3000'); // Burada uygulamanın adresini yaz
+  await page.waitForLoadState('load');
   await expect(page).toHaveTitle(/Learn Jenkins/);
 });
 
