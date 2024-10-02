@@ -46,9 +46,11 @@ pipeline {
             steps {
                 sh '''
                 echo ECHO E2E
-                npm install -g serve
-                serve -s build
-                npx playwright test
+                
+                npm install serve
+                node_modules/.bin/serve -s build &
+                sleep 5
+                npx playwright test --reporter=line
                 '''
             }
         }
