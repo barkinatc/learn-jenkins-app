@@ -31,8 +31,7 @@ pipeline {
             steps {
                 sh '''
                 echo TEST STAGE
-                touch build/index.html
-                
+                      
                 '''
             }
         }
@@ -45,11 +44,10 @@ pipeline {
             }
             steps {
                 sh '''
-                echo ECHO E2E
-                
+                echo ECHO E2E               
                 npm install serve
                 node_modules/.bin/serve -s build &
-                sleep 5
+                sleep 10
                 npx playwright test --reporter=line
                 '''
             }
