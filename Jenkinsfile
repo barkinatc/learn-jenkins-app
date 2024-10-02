@@ -34,25 +34,23 @@ pipeline {
 
             steps {
                 sh '''
-                    #test -f build/index.html
+                    echo zart
                     npm test
                 '''
             }
         }
-
-        stage('E2E') {
+         stage('E2E') {
             agent {
                 docker {
-                    image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                    image 'mcr.microsoft.com/playwright:v1.47.2-noble'
                     reuseNode true
                 }
             }
 
             steps {
                 sh '''
-                    npm install serve
-                    node_modules/.bin/serve -s build &
-                    sleep 10
+                    npm install -g serve
+                    serve -s build
                     npx playwright test
                 '''
             }
@@ -61,7 +59,7 @@ pipeline {
 
     post {
         always {
-            junit 'jest-results/junit.xml'
+            junit 'test-results/junit.xml'
         }
     }
 }
