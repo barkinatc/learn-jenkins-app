@@ -22,7 +22,7 @@ pipeline {
                 '''
             }
         }
-        */
+        
 
         stage('Test') {
             agent {
@@ -39,6 +39,7 @@ pipeline {
                 '''
             }
         }
+        */
          stage('E2E') {
             agent {
                 docker {
