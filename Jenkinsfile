@@ -85,6 +85,7 @@ environment{
                 sh '''
                     npm install netlify-cli
                     node_modules/.bin/netlify --version
+                    echo "Deploying the project to netlify ID : $NETLIFY_SITE_ID"
                 '''
             }
         }
