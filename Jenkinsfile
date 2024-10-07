@@ -104,7 +104,7 @@ environment{
                     }
 environment{
     
-    CI_ENVIRONMENT_URL='https://preeminent-douhua-90bcd5.netlify.app'
+    CI_ENVIRONMENT_URL='https://preeminent-douhua-90bcd5.netlify.app/'
 }
                     steps {
                         sh '''
